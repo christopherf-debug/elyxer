@@ -48,3 +48,18 @@ dist/
 build/
 dist/
 *.egg-info/
+
+# Python packaging artifacts
+build/
+dist/
+*.egg-info/
+
+# Python packaging artifacts
+build/
+dist/
+*.egg-info/
+
+# Python packaging artifacts
+build/
+dist/
+*.egg-info/

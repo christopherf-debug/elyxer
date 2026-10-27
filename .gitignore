@@ -78,3 +78,8 @@ dist/
 build/
 dist/
 *.egg-info/
+
+# Bytecode caches
+__pycache__/
+*.py[cod]
+*.class

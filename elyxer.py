@@ -97,7 +97,7 @@ class LineReader(object):
     if isinstance(filename, io.IOBase):
       self.file = filename
     else:
-      self.file = open(filename, 'r', encoding='utf-8')
+      self.file = codecs.open(filename, 'r', 'utf-8')
     self.linenumber = 1
     self.lastline = None
     self.current = None
@@ -184,7 +184,7 @@ class LineWriter(object):
   def writestring(self, string):
     "Write a string"
     if not self.file:
-      self.file = open(self.filename, 'w', encoding='utf-8')
+      self.file = codecs.open(self.filename, 'w', "utf-8")
     if self.file == sys.stdout and sys.version_info < (3,0):
       string = string.encode('utf-8')
     self.file.write(string)
@@ -3554,7 +3554,7 @@ class BulkFile(object):
 
   def readcodec(self, encoding):
     "Read the whole file with the given encoding"
-    filein = open(self.filename, 'r', encoding=encoding)
+    filein = codecs.open(self.filename, 'r', encoding)
     lines = filein.readlines()
     result = []
     for line in lines:
@@ -7236,7 +7236,7 @@ class Path(object):
 
   def open(self):
     "Open the file as readonly binary"
-    return open(self.path, 'rb')
+    return codecs.open(self.path, 'rb')
 
   def getmtime(self):
     "Return last modification time"

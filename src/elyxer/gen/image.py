@@ -149,7 +149,9 @@ class ImageConverter(object):
     if Options.converter in ImageConfig.converters:
       command = ImageConfig.converters[Options.converter]
     else:
-      command = Options.converter;
+      command = Options.converter
+    if (Options.converter == 'imagemagick' or command.startswith('convert')) and shutil.which('magick'):
+      command = 'magick' + command[len('convert'):]
     params = self.getparams(image)
     for param in params:
       command = command.replace('$' + param, str(params[param]))

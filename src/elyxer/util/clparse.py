@@ -35,6 +35,9 @@ class CommandLineParser(object):
     "Parse command line options"
     if len(args) == 0:
       return None
+    for i, a in enumerate(args):
+      if a == '-h':
+        args[i] = '--help'
     while len(args) > 0 and args[0].startswith('--'):
       key, value = self.readoption(args)
       if not key:

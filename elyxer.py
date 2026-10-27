@@ -1127,6 +1127,9 @@ class CommandLineParser(object):
     "Parse command line options"
     if len(args) == 0:
       return None
+    for i, a in enumerate(args):
+      if a == '-h':
+        args[i] = '--help'
     while len(args) > 0 and args[0].startswith('--'):
       key, value = self.readoption(args)
       if not key:
@@ -10125,11 +10128,23 @@ class InOutParser(object):
 
   def getreader(self):
     "Get the resulting reader."
-    return LineReader(self.filein)
+    if not isinstance(self.filein, str):
+      return LineReader(self.filein)
+    try:
+      return LineReader(self.filein)
+    except (FileNotFoundError, IOError) as exc:
+      sys.stderr.write(f"elyxer: error: cannot open '{self.filein}': {getattr(exc, 'strerror', exc)}\n")
+      sys.exit(1)
 
   def getwriter(self):
     "Get the resulting writer."
-    return LineWriter(self.fileout)
+    if not isinstance(self.fileout, str):
+      return LineWriter(self.fileout)
+    try:
+      return LineWriter(self.fileout)
+    except (FileNotFoundError, PermissionError, IOError) as exc:
+      sys.stderr.write(f"elyxer: error: cannot write to '{self.fileout}': {getattr(exc, 'strerror', exc)}\n")
+      sys.exit(1)
 
   def readdir(self, filename, diroption):
     "Read the current directory if needed"

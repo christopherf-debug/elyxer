@@ -38,7 +38,7 @@ class Path(object):
 
   def open(self):
     "Open the file as readonly binary"
-    return codecs.open(self.path, 'rb')
+    return open(self.path, 'rb')
 
   def getmtime(self):
     "Return last modification time"

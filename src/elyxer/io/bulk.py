@@ -49,7 +49,7 @@ class BulkFile(object):
 
   def readcodec(self, encoding):
     "Read the whole file with the given encoding"
-    filein = codecs.open(self.filename, 'r', encoding)
+    filein = open(self.filename, 'r', encoding=encoding)
     lines = filein.readlines()
     result = []
     for line in lines:

@@ -33,3 +33,8 @@ test/copyimages/docs
 test/subdir/mourning.png
 forks
 
+
+# Python packaging artifacts
+build/
+dist/
+*.egg-info/

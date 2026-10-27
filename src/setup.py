@@ -22,7 +22,12 @@
 # Alex 20090908
 # eLyXer distutils management
 
-from distutils.core import setup
+from setuptools import setup
+try:
+    from elyxer.conf.config import version as conf_version
+    ver = conf_version.get("number", "1.2.5")
+except Exception:
+    ver = "1.2.5"
 
 
 packages = [
@@ -33,7 +38,7 @@ packages = [
 packages = []
 
 setup(name = 'eLyXer',
-    version = 'unknown',
+    version = ver,
     description = 'LyX to HTML converter',
     long_description = 'eLyXer is a LyX to HTML converter, with a focus on flexibility and elegant output.',
     author = 'Alex Fernandez',
@@ -42,13 +47,12 @@ setup(name = 'eLyXer',
     packages = packages,
     scripts = ['elyxer.py', 'math2html.py', 'loremipsumize.py'],
     classifiers = [
-      'License :: OSI Approved :: GNU General Public License (GPL)',
       'Development Status :: 5 - Production/Stable', 'Environment :: Console',
-      'Operating System :: OS Independent', 'Programming Language :: Python :: 2.4',
+      'Operating System :: OS Independent', 'Programming Language :: Python :: 3',
       'Topic :: Printing', 'Topic :: Text Processing :: Markup :: HTML',
       'Topic :: Utilities', 'Topic :: Internet :: WWW/HTTP :: Dynamic Content'
       ],
-    license = 'GPL version 3 or later',
+    license = 'GPL-3.0-or-later',
     platforms = ['Windows NT/2000/XP', 'Mac OS X', 'GNU/Linux'],
     )
 

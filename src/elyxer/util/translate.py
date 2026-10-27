@@ -70,7 +70,7 @@ class Translator(object):
     if not self.translation:
       return message
     try:
-      message = self.translation.ugettext(message)
+      message = self.translation.gettext(message)
     except IOError:
       pass
     return message

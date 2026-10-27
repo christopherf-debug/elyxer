@@ -67,7 +67,7 @@ class FormulaBit(Container):
     "Return a copy of itself."
     return self.factory.parseformula(self.original)
 
-  def __unicode__(self):
+  def __str__(self):
     "Get a string representation"
     return self.__class__.__name__ + ' read in ' + self.original
 
@@ -109,7 +109,7 @@ class FormulaConstant(Constant):
     "Return a copy of itself."
     return FormulaConstant(self.original)
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable representation."
     return 'Formula constant: ' + self.string
 
@@ -192,7 +192,7 @@ class WhiteSpace(FormulaBit):
     "Parse all whitespace."
     self.original += pos.skipspace()
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable representation."
     return 'Whitespace: *' + self.original + '*'
 
@@ -244,7 +244,7 @@ class Bracket(FormulaBit):
 
   def innertext(self, pos):
     "Parse some text inside the bracket, following textual rules."
-    specialchars = FormulaConfig.symbolfunctions.keys()
+    specialchars = list(FormulaConfig.symbolfunctions.keys())
     specialchars.append(FormulaConfig.starts['command'])
     specialchars.append(FormulaConfig.starts['bracket'])
     specialchars.append(Comment.start)

@@ -270,7 +270,7 @@ class BranchOptions(object):
       return False
     return self.options['selected'] == '1'
 
-  def __unicode__(self):
+  def __str__(self):
     "String representation"
-    return 'options for ' + self.name + ': ' + unicode(self.options)
+    return 'options for ' + self.name + ': ' + str(self.options)
 

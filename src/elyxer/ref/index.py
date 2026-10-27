@@ -42,9 +42,7 @@ class ListInset(Container):
 
   def sortdictionary(self, dictionary):
     "Sort all entries in the dictionary"
-    keys = dictionary.keys()
-    # sort by name
-    keys.sort()
+    keys = sorted(dictionary.keys())
     return keys
 
   sortdictionary = classmethod(sortdictionary)
@@ -90,7 +88,7 @@ class IndexReference(Link):
       self.name = self.extracttext()
     IndexEntry.get(self.name).addref(self)
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable representation."
     return 'Reference to ' + self.name
 
@@ -112,7 +110,7 @@ class IndexHeader(Link):
 
   def addref(self, reference):
     "Create an arrow pointing to a reference."
-    reference.index = unicode(len(self.arrows))
+    reference.index = str(len(self.arrows))
     reference.destination = self.anchor
     reference.complete(u'↓', 'entry-' + self.key + '-' + reference.index)
     arrow = Link().complete(u'↑', type = 'IndexArrow')
@@ -122,7 +120,7 @@ class IndexHeader(Link):
     self.arrows.append(arrow)
     self.contents.append(arrow)
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable representation."
     return 'Index header for ' + self.name
 
@@ -155,7 +153,7 @@ class IndexGroup(Container):
       entry.group.sort()
       self.contents.append(entry)
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable representation."
     return 'Index group'
 
@@ -194,7 +192,7 @@ class IndexEntry(Container):
     "Split a name in parts divided by !."
     return [part.strip() for part in name.split('!')]
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable representation."
     return 'Index entry for ' + self.header.name
 

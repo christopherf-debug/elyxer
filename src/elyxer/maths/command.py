@@ -92,7 +92,7 @@ class FormulaCommand(FormulaBit):
     return FormulaCommand.start + pos.skipcurrent()
 
   def emptycommand(self, pos):
-    """Check for an empty command: look for command disguised as ending.
+    r"""Check for an empty command: look for command disguised as ending.
     Special case against '{ \{ \} }' situation."""
     command = ''
     if not pos.isout():

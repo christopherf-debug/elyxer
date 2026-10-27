@@ -228,7 +228,7 @@ class StatementParser(object):
       processed = self.processtoken(tok)
       if processed == '++':
         processed = '+ 1'
-        Trace.debug('Increasing ' + result + ' for endings: ' + unicode(endings))
+        Trace.debug('Increasing ' + result + ' for endings: ' + str(endings))
         tok.autoincreases.append(result)
       if processed == '--':
         Trace.debug('Decreasing ' + result)
@@ -241,7 +241,7 @@ class StatementParser(object):
         tok.next()
     if len(result) > 0:
       result = result[1:]
-    Trace.debug('Left after ' + tok.current() + ', endings ' + unicode(endings) + ', result: ' + result)
+    Trace.debug('Left after ' + tok.current() + ', endings ' + str(endings) + ', result: ' + result)
     return result
 
   def expectblock(self, tok):
@@ -261,7 +261,7 @@ class Tokenizer(object):
       '&&':'and', '||':'or', '!':'not'
       }
   comments = ['//', '/*']
-  javasymbols = comments + unmodified + modified.keys()
+  javasymbols = comments + unmodified + list(modified.keys())
 
   def __init__(self, pos):
     self.pos = pos

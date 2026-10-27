@@ -60,7 +60,7 @@ class NumberCounter(object):
 
   def gettext(self):
     "Get the next value as a text string."
-    return unicode(self.value)
+    return str(self.value)
 
   def getletter(self):
     "Get the next value as a letter."
@@ -80,7 +80,7 @@ class NumberCounter(object):
     number = self.value
     for numeral, value in self.romannumerals:
       if number >= value:
-        result += numeral * (number / value)
+        result += numeral * (number // value)
         number = number % value
     return result
 
@@ -110,7 +110,7 @@ class NumberCounter(object):
     "Reset the counter."
     self.value = 0
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable representation."
     result = 'Counter ' + self.name
     if self.mode:

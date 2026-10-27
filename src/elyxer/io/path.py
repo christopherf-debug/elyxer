@@ -60,7 +60,7 @@ class Path(object):
     base, ext = os.path.splitext(self.path)
     return ext
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a unicode string representation"
     return self.path
 
@@ -108,7 +108,7 @@ class OutputPath(Path):
       os.makedirs(dir)
 
   def removebackdirs(self):
-    "Remove any occurrences of ../ (or ..\ on Windows)"
+    r"Remove any occurrences of ../ (or ..\ on Windows)"
     self.path = os.path.normpath(self.path)
     backdir = '..' + os.path.sep
     while self.path.startswith(backdir):

@@ -126,7 +126,7 @@ class Float(Container):
       return [element]
     return self.searchincontents(element.contents, type)
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable representation"
     return 'Floating inset of type ' + self.type
 
@@ -229,7 +229,7 @@ class Listing(Container):
     if self.numbered:
       self.counter += 1
       tag = 'span class="number-' + self.numbered + '"'
-      contents.insert(0, TaggedText().constant(unicode(self.counter), tag))
+      contents.insert(0, TaggedText().constant(str(self.counter), tag))
     return contents
 
 class FloatNumber(Container):

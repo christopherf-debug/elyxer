@@ -243,7 +243,7 @@ class VariableMap(object):
     self.variables['author'] = DocumentAuthor().getvalue()
     self.variables['version'] = GeneralConfig.version['number'] + ' (' \
         + GeneralConfig.version['date'] + ')'
-    self.variables['year'] = unicode(datetime.date.today().year)
+    self.variables['year'] = str(datetime.date.today().year)
     self.variables['date'] = datetime.date.today().isoformat()
     self.variables['datetime'] = datetime.datetime.now().isoformat()
     self.variables['css'] = Options.css[0]

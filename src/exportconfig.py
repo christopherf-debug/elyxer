@@ -78,7 +78,7 @@ class Config(object):
     Trace.error('    --addcfg add.cfg: load additional config file')
     Trace.error('    --py config.py: choose Python config file')
     Trace.error('    --importcfg unicodesymbols: import LyX unicode symbols file')
-    Trace.error('    --importcsv unicodecsv: import a file of "\command,unicode" pairs')
+    Trace.error(r'    --importcsv unicodecsv: import a file of "\command,unicode" pairs')
     Trace.error('    --importunimath unimath.txt: import a file in unimath format')
     Trace.error('      (See http://milde.users.sourceforge.net/LUCR/Math/)')
     exit()
@@ -133,14 +133,14 @@ class Config(object):
   def mix(self, reader, addreader):
     "Mix two configuration files"
     Trace.message('--- new content follows ---')
-    for name, object in addreader.objects.iteritems():
+    for name, object in addreader.objects.items():
       Trace.message('')
       Trace.message('[' + name + ']')
       equiv = reader.objects[name]
-      for key, value in object.iteritems():
+      for key, value in object.items():
         if not key in equiv:
           equiv[key] = value
-          Trace.message(key + ':' + unicode(value))
+          Trace.message(key + ':' + str(value))
 
 class TranslationExport(object):
   "Export the translation to a file."
@@ -158,7 +158,7 @@ class TranslationExport(object):
     self.writer.writeline('# (C) 2010 Alex Fernandez <elyxer@gmail.com>.')
     self.writer.writeline('#')
     self.writer.writeline('')
-    for key, message in constants.iteritems():
+    for key, message in constants.items():
       self.writer.writeline('')
       self.writer.writeline('#: ' + key)
       self.writer.writeline('msgid  "' + message + '"')

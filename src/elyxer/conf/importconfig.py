@@ -97,13 +97,13 @@ class ImportCommands(ImportFile):
       Trace.error('Invalid unicode ' + unicode)
       return
     unicode = unicode.replace('0x', '')
-    unicodechar = unichr(int(unicode, 16))
+    unicodechar = chr(int(unicode, 16))
     command = pieces[4].replace('"', '')
     command = self.serializer.unescape(command)
     self.setsymbol(command, unicodechar)
 
 class ImportCsv(ImportFile):
-  "Import a file with comma-separated values of the form: \command,unicode."
+  r"Import a file with comma-separated values of the form: \command,unicode."
 
   def parse(self):
     "Parse the whole CSV file."
@@ -111,7 +111,7 @@ class ImportCsv(ImportFile):
     return self
 
   def parsecsv(self, line):
-    "Parse a line \command,unicode."
+    r"Parse a line \command,unicode."
     line = line.strip()
     if len(line) == 0:
       return
@@ -130,7 +130,7 @@ class ImportUnimath(ImportFile):
     return self
 
   def parseunimath(self, line):
-    "Parse a line \command,unicode."
+    r"Parse a line \command,unicode."
     line = line.strip()
     if len(line) == 0:
       return

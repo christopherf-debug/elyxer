@@ -38,7 +38,7 @@ class Piece(object):
 
   def match(self, tok):
     "Match the piece against the current token and return the match."
-    Trace.error('Unmatchable piece ' + unicode(self) + ' in ' + unicode(tok))
+    Trace.error('Unmatchable piece ' + str(self) + ' in ' + str(tok))
     return None
 
   def fitnext(self, token):
@@ -67,7 +67,7 @@ class ConstantWord(Piece):
       return None
     return self
 
-  def __unicode__(self):
+  def __str__(self):
     "Printable representation."
     return '\'' + self.constant + '\''
 
@@ -123,12 +123,12 @@ class Bracket(Piece):
       Trace.error('Unknown quantifier ' + quantifier)
       return self
     bracket = Cloner.clone(self.quantified[quantifier]).create(declaration, quantifier)
-    Trace.debug('Bracket: ' + unicode(bracket))
+    Trace.debug('Bracket: ' + str(bracket))
     return bracket
   
-  def __unicode__(self):
+  def __str__(self):
     "Printable representation."
-    return '[' + unicode(self.declaration) + ']' + self.quantifier
+    return '[' + str(self.declaration) + ']' + self.quantifier
 
 class MultipleBracket(Bracket):
   "A bracket present zero or more times (quantifier *)."
@@ -195,10 +195,10 @@ class Alternatives(Piece):
 
   def add(self, pieces):
     "Add a new set of alternative pieces."
-    alternative = Declaration('#' + unicode(len(self.alternatives)))
+    alternative = Declaration('#' + str(len(self.alternatives)))
     alternative.pieces = pieces
     self.alternatives.append(alternative)
-    Trace.debug('Alternatives: ' + unicode(self))
+    Trace.debug('Alternatives: ' + str(self))
     return self
 
   def match(self, tok):
@@ -209,13 +209,13 @@ class Alternatives(Piece):
         return result
     return None
 
-  def __unicode__(self):
+  def __str__(self):
     "Printable representation."
     if len(self.alternatives) == 0:
       return 'Empty alternatives'
     result = ''
     for alternative in self.alternatives:
-      result += ' | ' + unicode(alternative)
+      result += ' | ' + str(alternative)
     return result[3:]
 
 class Declaration(Piece):
@@ -321,16 +321,16 @@ class Declaration(Piece):
     decl = Declaration(self.key)
     state = tok.mark()
     for piece in self.pieces:
-      Trace.debug('Matching ' + tok.current() + ' against ' + unicode(piece))
+      Trace.debug('Matching ' + tok.current() + ' against ' + str(piece))
       result = piece.match(tok)
       if not result:
-        Trace.error('Mismatch of ' + tok.current() + ' against ' + unicode(piece))
+        Trace.error('Mismatch of ' + tok.current() + ' against ' + str(piece))
         tok.revert(state)
         return None
       decl.pieces.append(result)
     return decl
 
-  def __unicode__(self):
+  def __str__(self):
     "Printable representation."
     if len(self.pieces) == 0:
       return u'❲empty❳'
@@ -339,7 +339,7 @@ class Declaration(Piece):
       if isinstance(piece, Declaration):
         pieceresult = piece.key
       else:
-        pieceresult = unicode(piece)
+        pieceresult = str(piece)
       result += ', ' + pieceresult
     return u'❲' + result[2:] + u'❳'
 

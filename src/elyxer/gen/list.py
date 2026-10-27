@@ -45,8 +45,8 @@ class ListItem(Container):
     tag = TaggedText().complete(self.contents, 'li', True)
     self.contents = [tag]
 
-  def __unicode__(self):
-    return self.type + ' item @ ' + unicode(self.begin)
+  def __str__(self):
+    return self.type + ' item @ ' + str(self.begin)
 
 class DeeperList(Container):
   "A nested list"
@@ -63,10 +63,10 @@ class DeeperList(Container):
       Trace.error('Empty deeper list')
       return
 
-  def __unicode__(self):
-    result = 'deeper list @ ' + unicode(self.begin) + ': ['
+  def __str__(self):
+    result = 'deeper list @ ' + str(self.begin) + ': ['
     for element in self.contents:
-      result += unicode(element) + ', '
+      result += str(element) + ', '
     return result[:-2] + ']'
 
 class PendingList(object):
@@ -123,10 +123,10 @@ class PendingList(object):
     self.contents = [item]
     self.type = 'Itemize'
 
-  def __unicode__(self):
-    result = 'pending ' + unicode(self.type) + ': ['
+  def __str__(self):
+    result = 'pending ' + str(self.type) + ': ['
     for element in self.contents:
-      result += unicode(element) + ', '
+      result += str(element) + ', '
     if len(self.contents) > 0:
       result = result[:-2]
     return result + ']'

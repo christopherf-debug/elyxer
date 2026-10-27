@@ -91,7 +91,7 @@ class TeXCode(Container):
 
   def add(self, piece):
     "Add a new piece to the tag."
-    if isinstance(piece, basestring):
+    if isinstance(piece, str):
       self.addtext(piece)
     else:
       self.contents.append(piece)
@@ -195,7 +195,7 @@ class TeXCode(Container):
     "Parse a TeX comment: % to the end of the line."
     pos.globexcluding('\n')
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable representation."
     return 'TeX code: ' + self.extracttext()
 

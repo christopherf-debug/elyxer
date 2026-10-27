@@ -104,7 +104,7 @@ class StatementChooser(object):
     "Return any pending statement from elyxer.before."
     if tok.infor != 0:
       tok.next()
-      function = getattr(self, 'forparens' + unicode(tok.infor))
+      function = getattr(self, 'forparens' + str(tok.infor))
       return function(tok)
     if len(tok.autoincreases) != 0:
       return self.autoincrease(tok)

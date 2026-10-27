@@ -74,7 +74,7 @@ class Label(Link):
       return None
     return self.numbered(container.parent)
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable representation."
     if not hasattr(self, 'key'):
       return 'Unnamed label'
@@ -136,7 +136,7 @@ class Reference(Link):
       value = ''
     self.formatted = self.formatted.replace(key, value)
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable representation."
     return 'Reference ' + self.key
 

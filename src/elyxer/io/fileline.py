@@ -1,3 +1,4 @@
+import io
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -31,10 +32,10 @@ class LineReader(object):
   "Reads a file line by line"
 
   def __init__(self, filename):
-    if isinstance(filename, file):
+    if isinstance(filename, io.IOBase):
       self.file = filename
     else:
-      self.file = codecs.open(filename, 'rU', 'utf-8')
+      self.file = codecs.open(filename, 'r', 'utf-8')
     self.linenumber = 1
     self.lastline = None
     self.current = None
@@ -74,13 +75,13 @@ class LineReader(object):
     "Read a line from elyxer.file"
     self.current = self.file.readline()
     if not isinstance(self.file, codecs.StreamReaderWriter):
-      self.current = self.current.decode('utf-8')
+      if isinstance(self.current, bytes): self.current = self.current.decode('utf-8')
     if len(self.current) == 0:
       self.depleted = True
     self.current = self.current.rstrip('\n\r')
     self.linenumber += 1
     self.mustread = False
-    Trace.prefix = 'Line ' + unicode(self.linenumber) + ': '
+    Trace.prefix = 'Line ' + str(self.linenumber) + ': '
     if self.linenumber % 1000 == 0:
       Trace.message('Parsing')
 
@@ -93,7 +94,10 @@ class LineReader(object):
     return self.depleted
 
   def close(self):
-    self.file.close()
+    if self.file:
+      self.file.flush()
+      if self.file != sys.stdout:
+        self.file.close()
 
 class LineWriter(object):
   "Writes a file as a series of lists"
@@ -101,7 +105,7 @@ class LineWriter(object):
   file = False
 
   def __init__(self, filename):
-    if isinstance(filename, file):
+    if isinstance(filename, io.IOBase):
       self.file = filename
       self.filename = None
     else:
@@ -110,8 +114,8 @@ class LineWriter(object):
   def write(self, strings):
     "Write a list of strings"
     for string in strings:
-      if not isinstance(string, basestring):
-        Trace.error('Not a string: ' + unicode(string) + ' in ' + unicode(strings))
+      if not isinstance(string, str):
+        Trace.error('Not a string: ' + str(string) + ' in ' + str(strings))
         return
       self.writestring(string)
 
@@ -128,5 +132,8 @@ class LineWriter(object):
     self.writestring(line + '\n')
 
   def close(self):
-    self.file.close()
+    if self.file:
+      self.file.flush()
+      if self.file != sys.stdout:
+        self.file.close()
 

@@ -49,7 +49,7 @@ class BulkFile(object):
 
   def readcodec(self, encoding):
     "Read the whole file with the given encoding"
-    filein = codecs.open(self.filename, 'rU', encoding)
+    filein = codecs.open(self.filename, 'r', encoding)
     lines = filein.readlines()
     result = []
     for line in lines:
@@ -68,7 +68,7 @@ class BulkFile(object):
     os.chmod(self.temp, os.stat(self.filename).st_mode)
     os.rename(self.temp, self.filename)
 
-  def __unicode__(self):
+  def __str__(self):
     "Get the unicode representation"
     return 'file ' + self.filename
 

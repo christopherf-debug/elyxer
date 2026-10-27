@@ -52,7 +52,7 @@ class NavigationLink(Container):
     "Complete the navigation link with destination container."
     "The 'after' parameter decides if the link goes after the part title."
     if not container.partkey:
-      Trace.error('No part key for link name ' + unicode(container))
+      Trace.error('No part key for link name ' + str(container))
       return
     self.link.contents = [Constant(Translator.translate(self.name))]
     partname = self.getpartname(container)
@@ -85,7 +85,7 @@ class UpAnchor(Link):
   def create(self, container):
     "Create the up anchor based on the first container."
     if not container.partkey:
-      Trace.error('No part key for ' + unicode(container))
+      Trace.error('No part key for ' + str(container))
       return None
     self.createliteral(container.partkey.tocentry)
     self.partkey.titlecontents = container.partkey.titlecontents

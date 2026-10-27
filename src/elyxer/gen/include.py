@@ -103,7 +103,7 @@ class IncludeInset(Container):
       contents.append(Constant(line))
     return contents
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable description."
     if not self.filename:
       return 'Included unnamed file'

@@ -195,7 +195,7 @@ class EquationEnvironment(MultiRowFormula):
     self.parserows(pos)
 
 class BeginCommand(CommandBit):
-  "A \\begin{}...\end command and what it entails (array, cases, aligned)"
+  r"A \begin{}...\end command and what it entails (array, cases, aligned)"
 
   commandmap = {FormulaConfig.array['begin']:''}
 

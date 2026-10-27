@@ -92,7 +92,7 @@ class NewfangledChunk(Layout):
   def declaration(self):
     "Get the chunk declaration."
     contents = []
-    text = u'⟨' + self.name + '[' + unicode(len(NewfangledChunk.names[self.name])) + '] '
+    text = u'⟨' + self.name + '[' + str(len(NewfangledChunk.names[self.name])) + '] '
     contents.append(Constant(text))
     contents.append(self.origin)
     text = ''
@@ -212,7 +212,7 @@ class NewfangledChunkRef(Inset):
     self.contents.append(self.origin)
     self.contents.append(Constant(u'⟩'))
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable representation."
     return 'Reference to chunk ' + self.ref
 

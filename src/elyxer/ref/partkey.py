@@ -121,7 +121,7 @@ class PartKey(object):
       return
     self.titlecontents = extractor.extract(container)
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable representation."
     return 'Part key for ' + self.partkey
 
@@ -179,6 +179,8 @@ class LayoutPartKey(PartKey):
 
   def getfilename(self, type):
     "Get the filename to be used if splitpart is active."
+    if not Options.splitpart:
+      return None
     if self.level == Options.splitpart and self.generator.isnumbered(type):
       return self.number
     if self.level <= Options.splitpart:
@@ -191,7 +193,7 @@ class LayoutPartKey(PartKey):
       return True
     return self.generator.isinordered(layout.type)
 
-  def __unicode__(self):
+  def __str__(self):
     "Get a printable representation."
     return 'Part key for layout ' + self.tocentry
 

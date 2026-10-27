@@ -77,7 +77,7 @@ class Link(Container):
     self.destination = destination
     destination.destination = self
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable representation."
     result = 'Link'
     if self.anchor:

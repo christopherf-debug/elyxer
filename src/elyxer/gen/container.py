@@ -47,7 +47,7 @@ class Container(object):
   def gethtml(self):
     "Get the resulting HTML"
     html = self.output.gethtml(self)
-    if isinstance(html, basestring):
+    if isinstance(html, str):
       Trace.error('Raw string ' + html)
       html = [html]
     return self.escapeall(html)
@@ -68,9 +68,7 @@ class Container(object):
 
   def escape(self, line, replacements = EscapeConfig.entities):
     "Escape a line with replacements from elyxer.a map"
-    pieces = replacements.keys()
-    # do them in order
-    pieces.sort()
+    pieces = sorted(replacements.keys())
     for piece in pieces:
       if piece in line:
         line = line.replace(piece, replacements[piece])
@@ -152,7 +150,7 @@ class Container(object):
 
   def tree(self, level = 0):
     "Show in a tree"
-    Trace.debug("  " * level + unicode(self))
+    Trace.debug("  " * level + str(self))
     for container in self.contents:
       container.tree(level + 1)
 
@@ -178,11 +176,11 @@ class Container(object):
       current = current.parent
     return False
 
-  def __unicode__(self):
+  def __str__(self):
     "Get a description"
     if not self.begin:
       return self.__class__.__name__
-    return self.__class__.__name__ + '@' + unicode(self.begin)
+    return self.__class__.__name__ + '@' + str(self.begin)
 
 class BlackBox(Container):
   "A container that does not output anything"
@@ -226,7 +224,7 @@ class StringContainer(Container):
     if ContainerConfig.string['startcommand'] in replaced and len(replaced) > 1:
       # unprocessed commands
       if self.begin:
-        message = 'Unknown command at ' + unicode(self.begin) + ': '
+        message = 'Unknown command at ' + str(self.begin) + ': '
       else:
         message = 'Unknown command: '
       Trace.error(message + replaced.strip())
@@ -243,11 +241,11 @@ class StringContainer(Container):
     "Return all text."
     return self.string
   
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable representation."
     result = 'StringContainer'
     if self.begin:
-      result += '@' + unicode(self.begin)
+      result += '@' + str(self.begin)
     ellipsis = '...'
     if len(self.string.strip()) <= 15:
       ellipsis = ''
@@ -261,7 +259,7 @@ class Constant(StringContainer):
     self.string = text
     self.output = StringOutput()
 
-  def __unicode__(self):
+  def __str__(self):
     return 'Constant: ' + self.string
 
 class TaggedText(Container):
@@ -285,7 +283,7 @@ class TaggedText(Container):
     constant = Constant(text)
     return self.complete([constant], tag, breaklines)
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable representation."
     if not hasattr(self.output, 'tag'):
       return 'Emtpy tagged text'

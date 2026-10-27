@@ -84,7 +84,7 @@ class TOCEntry(Container):
       return False
     return True
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable representation."
     if not self.partkey.tocentry:
       return 'Unnamed TOC entry'
@@ -131,9 +131,9 @@ class IndentedEntry(Container):
     self.contents = [indent, entry]
     return self
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable documentation."
-    return 'Indented ' + unicode(self.entry)
+    return 'Indented ' + str(self.entry)
 
 class TOCTree(object):
   "A tree that contains the full TOC."

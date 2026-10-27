@@ -22,7 +22,7 @@
 # Alex 20090207
 # eLyXer formula processing
 
-import urllib
+import urllib.parse as urllib
 from elyxer.gen.container import *
 from elyxer.util.trace import Trace
 from elyxer.util.clone import *
@@ -133,7 +133,7 @@ class Formula(Container):
     self.parsed = pos.glob(lambda: True)
     pos.popending(limit)
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable representation."
     if self.partkey and self.partkey.number:
       return 'Formula (' + self.partkey.number + ')'

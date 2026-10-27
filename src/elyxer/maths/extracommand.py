@@ -98,7 +98,7 @@ class LimitPreviousCommand(LimitCommand):
     self.output = TaggedOutput().settag('span class="limits"')
     self.factory.clearskipped(pos)
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable representation."
     return 'Limit previous command'
 

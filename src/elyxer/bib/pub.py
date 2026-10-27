@@ -81,11 +81,11 @@ class PubEntry(BibEntry):
     part = BibPart(self.parser.tags).parse(pos)
     for variable in part.searchall(BibVariable):
       if variable.empty():
-        Trace.error('Error parsing BibTeX template for ' + unicode(self) + ': '
-            + unicode(variable) + ' is empty')
+        Trace.error('Error parsing BibTeX template for ' + str(self) + ': '
+            + str(variable) + ' is empty')
     return [part]
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a string representation"
     string = ''
     if 'author' in self.parser.tags:
@@ -211,7 +211,7 @@ class BibVariable(Container):
     "Remove the output tag and leave just the contents."
     self.output = ContentsOutput()
 
-  def __unicode__(self):
+  def __str__(self):
     "Return a printable representation."
     result = 'variable ' + self.key
     if not self.empty():
